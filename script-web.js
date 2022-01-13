@@ -13,13 +13,19 @@ function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection){
         return "draw";
     } else if (
-            (playerSelection === 'rock' && computerSelection === 'scissors') || 
-            (playerSelection === 'scissors' && computerSelection === 'paper') || 
-            (playerSelection === 'paper' && computerSelection === 'rock')
+            (playerSelectionString === 'rock' && computerSelectionString === 'scissors') || 
+            (playerSelectionString === 'scissors' && computerSelectionString === 'paper') || 
+            (playerSelectionString === 'paper' && computerSelectionString === 'rock')
     ){
         return "player";
-    } else {
+    } else if (
+            (playerSelectionString === 'scissors' && computerSelectionString === 'rock') || 
+            (playerSelectionString === 'paper' && computerSelectionString === 'scissors') || 
+            (playerSelectionString === 'rock' && computerSelectionString === 'paper')
+    ){
         return "computer";
+    } else {
+        return "invalid"
     }
 }
 
@@ -31,8 +37,8 @@ function game() {
     let roundResult = '';
 
     while (playerScore < 3 && computerScore < 3){
-        // playerMove = prompt('Enter your move:');
-        playerMove = computerPlay();
+        playerMove = prompt('Enter your move:');
+
         computerMove = computerPlay();
 
         roundResult = playRound(playerMove, computerMove);
@@ -43,8 +49,10 @@ function game() {
         } else if (roundResult === 'computer'){
             computerScore++;
             console.log("The computer won the round. Score: " + playerScore + " - " + computerScore);
-        } else if (roundResult === 'draw'){
+        } else if (roundResult === 'draw') {
             console.log("Draw!");
+        } else if (roundResult === 'invalid') {
+            console.log("Invalid Entry, choose from Rock, Paper, or Scissors")
         }
     }
 
