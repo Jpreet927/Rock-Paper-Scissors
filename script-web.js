@@ -4,17 +4,18 @@ let robotMove = '';
 let humanMove = '';
 let roundResult = '';
 
+// grabbing and caching DOM elements
 const humanScore_span = document.getElementById("score-human");
 const robotScore_span = document.getElementById("score-robot");
-const roundResult_div = document.querySelector("match-result");
-
+const roundResult_div = document.querySelector(".match-result");
 const rock_div = document.getElementById("rock");
 const paper_div = document.getElementById("paper");
 const scissors_div = document.getElementById("scissors");
 
+
 function robotPlay() {
-    const selection = ['rock', 'paper', 'scissors'];
-    var robotMove = selection[Math.floor(Math.random() * 3)];
+    const options = ['rock', 'paper', 'scissors'];
+    var robotMove = options[Math.floor(Math.random() * options.length)];
 
     return robotMove;
 }
@@ -25,22 +26,35 @@ function playRound(humanSelection, robotSelection) {
     var robotSelectionString = robotSelection.toString().toLowerCase();
 
     if (humanSelectionString === robotSelectionString){
-        return "draw";
+        roundResult_div.textContent = "It's a draw! Go again.";
     } else if (
             (humanSelectionString === 'rock' && robotSelectionString === 'scissors') || 
             (humanSelectionString === 'scissors' && robotSelectionString === 'paper') || 
             (humanSelectionString === 'paper' && robotSelectionString === 'rock')
     ){
-        return "human";
+        humanScore++;
+        humanScore_span.textContent = humanScore;
+        roundResult_div.textContent = "Nice! You won the round.";
     } else if (
             (humanSelectionString === 'scissors' && robotSelectionString === 'rock') || 
             (humanSelectionString === 'paper' && robotSelectionString === 'scissors') || 
             (humanSelectionString === 'rock' && robotSelectionString === 'paper')
     ){
-        return "robot";
-    } else {
-        return "invalid"
+        robotScore++;
+        robotScore_span.textContent = robotScore;
+        roundResult_div.textContent = "The robot won that round!";
     }
+
+    if (humanScore === 5){
+        console.log("You win!");
+        roundResult_div.textContent = "You win! Rejoice as the robots have been defeated.";
+        return;
+    } else if (robotScore === 5) {
+        console.log("The Robot Won.");
+        roundResult_div.textContent = "You lost. Humanity will be eradicated because of you, nice job! :)";
+        return;
+    }
+
 }
 
 function game() {
@@ -73,7 +87,23 @@ function game() {
 
 
 // CLICK EVENT LISTENERS
+rock_div.addEventListener('click', () => {
+    humanMove = 'rock';
+    robotMove = robotPlay();
+    playRound(humanMove, robotMove);
+})
 
+paper_div.addEventListener('click', () => {
+    humanMove = 'paper';
+    robotMove = robotPlay();
+    playRound(humanMove, robotMove);
+})
+
+scissors_div.addEventListener('click', () => {
+    humanMove = 'scissors';
+    robotMove = robotPlay();
+    playRound(humanMove, robotMove);
+})
 
 // result = playRound('scissors', 'paper');
 // console.log(result);
