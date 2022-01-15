@@ -37,7 +37,7 @@ function game() {
     let roundResult = '';
 
     while (playerScore < 3 && computerScore < 3){
-        playerMove = prompt('Enter your move:');
+        // playerMove = prompt('Enter your move:');
 
         computerMove = computerPlay();
 
