@@ -1,54 +1,61 @@
-function computerPlay() {
-    const selection = ['rock', 'paper', 'scissors'];
-    var computerMove = selection[Math.floor(Math.random() * 3)];
+let humanScore = 0;
+let robotScore = 0;
+let robotMove = '';
+let humanMove = '';
+let roundResult = '';
 
-    return computerMove;
+const humanScore_span = document.getElementById("score-human");
+const robotScore_span = document.getElementById("score-robot");
+const roundResult_div = document.querySelector("match-result");
+
+const rock_div = document.getElementById("rock");
+const paper_div = document.getElementById("paper");
+const scissors_div = document.getElementById("scissors");
+
+function robotPlay() {
+    const selection = ['rock', 'paper', 'scissors'];
+    var robotMove = selection[Math.floor(Math.random() * 3)];
+
+    return robotMove;
 }
 
-function playRound(playerSelection, computerSelection) {
+function playRound(humanSelection, robotSelection) {
     // your code here!
-    var playerSelectionString = playerSelection.toString().toLowerCase();
-    var computerSelectionString = computerSelection.toString().toLowerCase();
+    var humanSelectionString = humanSelection.toString().toLowerCase();
+    var robotSelectionString = robotSelection.toString().toLowerCase();
 
-    if (playerSelection === computerSelection){
+    if (humanSelectionString === robotSelectionString){
         return "draw";
     } else if (
-            (playerSelectionString === 'rock' && computerSelectionString === 'scissors') || 
-            (playerSelectionString === 'scissors' && computerSelectionString === 'paper') || 
-            (playerSelectionString === 'paper' && computerSelectionString === 'rock')
+            (humanSelectionString === 'rock' && robotSelectionString === 'scissors') || 
+            (humanSelectionString === 'scissors' && robotSelectionString === 'paper') || 
+            (humanSelectionString === 'paper' && robotSelectionString === 'rock')
     ){
-        return "player";
+        return "human";
     } else if (
-            (playerSelectionString === 'scissors' && computerSelectionString === 'rock') || 
-            (playerSelectionString === 'paper' && computerSelectionString === 'scissors') || 
-            (playerSelectionString === 'rock' && computerSelectionString === 'paper')
+            (humanSelectionString === 'scissors' && robotSelectionString === 'rock') || 
+            (humanSelectionString === 'paper' && robotSelectionString === 'scissors') || 
+            (humanSelectionString === 'rock' && robotSelectionString === 'paper')
     ){
-        return "computer";
+        return "robot";
     } else {
         return "invalid"
     }
 }
 
 function game() {
-    let playerScore = 0;
-    let computerScore = 0;
-    let computerMove = '';
-    let playerMove = '';
-    let roundResult = '';
+    while (humanScore < 3 && robotScore < 3){
 
-    while (playerScore < 3 && computerScore < 3){
-        // playerMove = prompt('Enter your move:');
+        robotMove = robotPlay();
 
-        computerMove = computerPlay();
+        roundResult = playRound(humanMove, robotMove);
 
-        roundResult = playRound(playerMove, computerMove);
-
-        if (roundResult === 'player'){
-            playerScore++;
-            console.log("You won the round. Score:" + playerScore + " - " + computerScore);
-        } else if (roundResult === 'computer'){
-            computerScore++;
-            console.log("The computer won the round. Score: " + playerScore + " - " + computerScore);
+        if (roundResult === 'human'){
+            humanScore++;
+            console.log("You won the round. Score:" + humanScore + " - " + robotScore);
+        } else if (roundResult === 'robot'){
+            robotScore++;
+            console.log("The robot won the round. Score: " + humanScore + " - " + robotScore);
         } else if (roundResult === 'draw') {
             console.log("Draw!");
         } else if (roundResult === 'invalid') {
@@ -56,15 +63,17 @@ function game() {
         }
     }
 
-    if (playerScore === 3){
+    if (humanScore === 3){
         console.log("You win!");
-    } else if (computerScore === 3) {
-        console.log("The Computer Won.");
+    } else if (robotScore === 3) {
+        console.log("The Robot Won.");
     }
 
 }
 
+
+// CLICK EVENT LISTENERS
+
+
 // result = playRound('scissors', 'paper');
 // console.log(result);
-
-game()
