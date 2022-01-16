@@ -94,8 +94,10 @@ scissors_div.addEventListener('click', () => {
 tryAgain_btn.addEventListener('click', () => {
     humanScore = 0;
     robotScore = 0;
+
     humanScore_span.textContent = humanScore;
     robotScore_span.textContent = robotScore;
+    roundResult_div.textContent = "Click an icon to start!";
 
     for (var i = 0; i < rpsOptions_div.length; i++){
         rpsOptions_div[i].classList.remove("game-finish");
