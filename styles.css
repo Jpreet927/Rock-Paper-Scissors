@@ -10,10 +10,15 @@
 header {
   min-width: 300px;
   max-width: 600px;
-  margin: 84px 600px;
-  display: flex;
-  flex-direction: column;
+  /* margin: 84px 600px; */
+  text-align: center;
   /* padding: 0px 600px; */
+  margin: 84px auto;
+}
+
+.header-container {
+  display: inline-block;
+  text-align: left;
 }
 
 header .title {
