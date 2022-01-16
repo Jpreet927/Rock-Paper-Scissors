@@ -8,6 +8,7 @@ let roundResult = '';
 const humanScore_span = document.getElementById("score-human");
 const robotScore_span = document.getElementById("score-robot");
 const roundResult_div = document.querySelector(".match-result");
+const rpsOptions_div = document.querySelectorAll("choice");
 const rock_div = document.getElementById("rock");
 const paper_div = document.getElementById("paper");
 const scissors_div = document.getElementById("scissors");
@@ -48,11 +49,15 @@ function playRound(humanSelection, robotSelection) {
     if (humanScore === 5){
         console.log("You win!");
         roundResult_div.textContent = "You win! Rejoice as the robots have been defeated.";
-        return;
+        rock_div.disabled = true;
+        paper_div.disabled = true;
+        scissors_div.disabled = true;
     } else if (robotScore === 5) {
         console.log("The Robot Won.");
         roundResult_div.textContent = "You lost. Humanity will be eradicated because of you, nice job! :)";
-        return;
+        rock_div.disabled = true;
+        paper_div.disabled = true;
+        scissors_div.disabled = true;
     }
 
 }

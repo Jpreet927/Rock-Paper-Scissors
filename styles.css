@@ -85,3 +85,7 @@ footer {
   background-color: rgb(231, 231, 231);
   width: 100%;
 }
+
+.game-finish {
+  pointer-events: none;
+}
