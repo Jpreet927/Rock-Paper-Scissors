@@ -1,6 +1,6 @@
-# odin-rockpaperscissors
+# The Odin Project: JavaScript Project $1
 
-#
+# Rock, paper, scissors with a computer.
 
 This application allows the user to play Rock, Paper, & Scissors with a computer.
 Click on any of the icons to select your move. The computers move will be randomly generated, and the score will increase accordingly.
