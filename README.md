@@ -2,8 +2,6 @@
 
 #
 
-# This application allows the user to play Rock, Paper, & Scissors with a computer.
-
-# The user will input their move, and a move will be randomly generated from the computer.
-
-# The winner is decided once either party reaches a score of 3.
+This application allows the user to play Rock, Paper, & Scissors with a computer.
+Click on any of the icons to select your move. The computers move will be randomly generated, and the score will increase accordingly.
+The winner is decided once either party reaches a score of 5.

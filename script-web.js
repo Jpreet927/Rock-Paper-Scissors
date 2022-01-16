@@ -8,12 +8,14 @@ let roundResult = '';
 const humanScore_span = document.getElementById("score-human");
 const robotScore_span = document.getElementById("score-robot");
 const roundResult_div = document.querySelector(".match-result");
-const rpsOptions_div = document.querySelectorAll("choice");
+const rpsOptions_div = document.querySelectorAll(".choice");
 const rock_div = document.getElementById("rock");
 const paper_div = document.getElementById("paper");
 const scissors_div = document.getElementById("scissors");
+const tryAgain_btn = document.querySelector(".try-again-btn > .try-again")
 
 
+// chooses robot move by randomly indexing options array
 function robotPlay() {
     const options = ['rock', 'paper', 'scissors'];
     var robotMove = options[Math.floor(Math.random() * options.length)];
@@ -21,6 +23,8 @@ function robotPlay() {
     return robotMove;
 }
 
+
+// determines the winner of a given round and incremements score
 function playRound(humanSelection, robotSelection) {
     // your code here!
     var humanSelectionString = humanSelection.toString().toLowerCase();
@@ -46,48 +50,25 @@ function playRound(humanSelection, robotSelection) {
         roundResult_div.textContent = "The robot won that round!";
     }
 
+    checkScore();
+}
+
+
+// checks if the game has reached the end
+function checkScore() {
     if (humanScore === 5){
         console.log("You win!");
         roundResult_div.textContent = "You win! Rejoice as the robots have been defeated.";
-        rock_div.disabled = true;
-        paper_div.disabled = true;
-        scissors_div.disabled = true;
     } else if (robotScore === 5) {
         console.log("The Robot Won.");
-        roundResult_div.textContent = "You lost. Humanity will be eradicated because of you, nice job! :)";
-        rock_div.disabled = true;
-        paper_div.disabled = true;
-        scissors_div.disabled = true;
+        roundResult_div.textContent = "You lost. Humanity is done for, nice job! :)";
     }
 
-}
-
-function game() {
-    while (humanScore < 3 && robotScore < 3){
-
-        robotMove = robotPlay();
-
-        roundResult = playRound(humanMove, robotMove);
-
-        if (roundResult === 'human'){
-            humanScore++;
-            console.log("You won the round. Score:" + humanScore + " - " + robotScore);
-        } else if (roundResult === 'robot'){
-            robotScore++;
-            console.log("The robot won the round. Score: " + humanScore + " - " + robotScore);
-        } else if (roundResult === 'draw') {
-            console.log("Draw!");
-        } else if (roundResult === 'invalid') {
-            console.log("Invalid Entry, choose from Rock, Paper, or Scissors")
+    if (humanScore === 5 || robotScore === 5){
+        for (var i = 0; i < rpsOptions_div.length; i++){
+            rpsOptions_div[i].classList.add("game-finish");
         }
     }
-
-    if (humanScore === 3){
-        console.log("You win!");
-    } else if (robotScore === 3) {
-        console.log("The Robot Won.");
-    }
-
 }
 
 
@@ -110,5 +91,13 @@ scissors_div.addEventListener('click', () => {
     playRound(humanMove, robotMove);
 })
 
-// result = playRound('scissors', 'paper');
-// console.log(result);
+tryAgain_btn.addEventListener('click', () => {
+    humanScore = 0;
+    robotScore = 0;
+    humanScore_span.textContent = humanScore;
+    robotScore_span.textContent = robotScore;
+
+    for (var i = 0; i < rpsOptions_div.length; i++){
+        rpsOptions_div[i].classList.remove("game-finish");
+    }
+})

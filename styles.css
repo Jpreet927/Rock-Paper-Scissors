@@ -8,19 +8,25 @@
 }
 
 header {
-  margin: 76px 0;
-  padding: 0px 600px;
+  min-width: 300px;
+  max-width: 600px;
+  margin: 84px 600px;
+  display: flex;
+  flex-direction: column;
+  /* padding: 0px 600px; */
 }
 
 header .title {
   font-weight: 800;
   font-size: 60px;
   color: rgb(58, 58, 58);
+  align-self: left;
 }
 
 hr.solid {
   border-top: 1.5px solid #bbb;
   margin-top: 20px;
+  align-self: left;
 }
 
 .body {
@@ -61,7 +67,15 @@ img {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
+  margin: 16px;
+}
+
+.scoreboard-score {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
 }
 
 .game-info {
@@ -84,6 +98,24 @@ footer {
   font-size: 12px;
   background-color: rgb(231, 231, 231);
   width: 100%;
+}
+
+.try-again {
+  background: rgb(228, 228, 228);
+  border: none;
+  padding: 16px;
+  font-size: 18px;
+}
+
+.try-again:hover {
+  cursor: pointer;
+}
+
+.try-again-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .game-finish {
